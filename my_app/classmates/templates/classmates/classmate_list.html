@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        td.center {
+            text-align: center;
+        }
+
+        td.view, td.edit, td.delete {
+            text-align: center;
+            padding: 5px 10px;
+            border: 1px solid #333;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        td.view { background-color: #3498db; color: #fff; }
+        td.edit { background-color: #2ecc71; color: #fff; }
+        td.delete { background-color: #e74c3c; color: #fff; }
+
+        a.new-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #ffcc00;
+            color: #333;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        a.new-link:hover {
+            background-color: #ffd633;
+        }
+    </style>
+    <title>Classmates</title>
+</head>
+<body>
+
+    <h1>Classmates</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th class="center">Firstname</th>
+                <th class="center">Lastname</th>
+                <th class="center">Age</th>
+                <th class="center view">View</th>
+                <th class="center edit">Edit</th>
+                <th class="center delete">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for classmate in object_list %}
+            <tr>
+                <td>{{ classmate.firstname }}</td>
+                <td>{{ classmate.lastname }}</td>
+                <td>{{ classmate.age }}</td>
+                <td class="view"><a href="{% url "classmate_view" classmate.id %}">View</a></td>
+                <td class="edit"><a href="{% url "classmate_edit" classmate.id %}">Edit</a></td>
+                <td class="delete"><a href="{% url "classmate_delete" classmate.id %}">Delete</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    <a href="{% url "classmate_new" %}" class="new-link">New</a>
+
+</body>
+</html>
+
